@@ -6,5 +6,14 @@ public class TareaItem
     public string Titulo { get; set; } = "";    
     public string Descripcion { get; set; } = "";
     public DateTime Fecha { get; set; }      
-    public bool Estado { get; set; }       
+    public bool Estado { get; set; }  
+    public Prioridad NivelPrioridad { get; set; } = Prioridad.Media;
+
+   
 }
+ public enum Prioridad{
+
+    Baja,
+    Media,
+    Alta
+}     

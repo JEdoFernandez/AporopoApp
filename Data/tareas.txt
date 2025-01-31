@@ -1,0 +1,2 @@
+1|string|string|31/01/2025 12:26:41|True|Baja
+2|Otra tarea|Otra descripción|15/02/2024 0:00:00|False|Media

@@ -45,6 +45,7 @@ namespace GestorTareasAPI.Controllers
             task.Descripcion = updatedTask.Descripcion;
             task.Fecha = updatedTask.Fecha;
             task.Estado = updatedTask.Estado;
+            task.NivelPrioridad =updatedTask.NivelPrioridad;
             
             TxtProcesador.CrearTareas(tasks);
             return NoContent();

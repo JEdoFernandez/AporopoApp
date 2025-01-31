@@ -13,10 +13,13 @@ namespace AporopoApi.Data
 
         // Leer Tareas
         public static List<TareaItem> LeerTareas()
+
         {
+                var lineas = File.ReadAllLines(tareasRutaArchivo)
+                     .Where(linea => !string.IsNullOrWhiteSpace(linea)) // Ignorar líneas vacías
+                     .ToList();
             if (!File.Exists(tareasRutaArchivo)) return new List<TareaItem>();
             
-            var lineas = File.ReadAllLines(tareasRutaArchivo);
             List<TareaItem> taskList = new List<TareaItem>();
             foreach (string linea in lineas)
             {
@@ -46,14 +49,15 @@ namespace AporopoApi.Data
                 Titulo = parts[1],
                 Descripcion = parts[2],
                 Fecha = DateTime.Parse(parts[3]),
-                Estado = bool.Parse(parts[4])
+                Estado = bool.Parse(parts[4]),
+                NivelPrioridad = Enum.Parse<Prioridad>(parts[5])
             };
         }
 
         // Convierte un objeto TareaItem en una línea de texto
         private static string TareaLinea(TareaItem tarea)
         {
-            return $"{tarea.TareaId}|{tarea.Titulo}|{tarea.Descripcion}|{tarea.Fecha}|{tarea.Estado}";
+            return $"{tarea.TareaId}|{tarea.Titulo}|{tarea.Descripcion}|{tarea.Fecha}|{tarea.Estado}|{tarea.NivelPrioridad}";
         }
 
         // Leer todos los usuarios
@@ -100,3 +104,4 @@ namespace AporopoApi.Data
         }
     }
 }
+
