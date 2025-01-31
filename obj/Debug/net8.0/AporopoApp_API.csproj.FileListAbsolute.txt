@@ -31,3 +31,4 @@ C:\Users\Jose M\Documents\DAW\SAN VALERO\Práctica presencial\AporopoApp_API\obj
 C:\Users\Jose M\Documents\DAW\SAN VALERO\Práctica presencial\AporopoApp_API\obj\Debug\net8.0\AporopoApp_API.pdb
 C:\Users\Jose M\Documents\DAW\SAN VALERO\Práctica presencial\AporopoApp_API\obj\Debug\net8.0\AporopoApp_API.genruntimeconfig.cache
 C:\Users\Jose M\Documents\DAW\SAN VALERO\Práctica presencial\AporopoApp_API\obj\Debug\net8.0\ref\AporopoApp_API.dll
+C:\Users\Jose M\Documents\DAW\SAN VALERO\Práctica presencial\AporopoApp_API\obj\Debug\net8.0\AporopoApp_API.sourcelink.json

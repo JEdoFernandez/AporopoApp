@@ -1,0 +1,15 @@
+
+bin/
+obj/
+
+
+.vscode/
+.vs/
+*.user
+*.suo
+*.csproj.user
+
+
+project.lock.json
+project.assets.json
+*.log
