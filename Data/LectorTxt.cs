@@ -4,42 +4,42 @@ using System.IO;
 using System.Linq;
 using Models;
 
-namespace TaskManagerAPI.Data
+namespace AporopoApi.Data
 {
-    public static class TxtFileHelper
+    public static class TxtProcesador
     {
-        private static readonly string tasksFilePath = "Data/tasks.txt";
-        private static readonly string usersFilePath = "Data/users.txt";
+        private static readonly string tareasRutaArchivo = "Data/tareas.txt";
+        private static readonly string usuariosRutaArchivo = "Data/usuarios.txt";
 
-        // Leer todas las tareas desde tasks.txt
-        public static List<TareaItem> ReadTasks()
+        // Leer Tareas
+        public static List<TareaItem> LeerTareas()
         {
-            if (!File.Exists(tasksFilePath)) return new List<TareaItem>();
+            if (!File.Exists(tareasRutaArchivo)) return new List<TareaItem>();
             
-            var lines = File.ReadAllLines(tasksFilePath);
+            var lineas = File.ReadAllLines(tareasRutaArchivo);
             List<TareaItem> taskList = new List<TareaItem>();
-            foreach (string line in lines)
+            foreach (string linea in lineas)
             {
-                taskList.Add(LineToTask(line));
+                taskList.Add(LineaTarea(linea));
             }
             return taskList;
         }
 
-        // Escribir todas las tareas en tasks.txt
-        public static void WriteTasks(List<TareaItem> tasks)
+        //Crear Tareas
+        public static void CrearTareas(List<TareaItem> tareas)
         {
-            List<string> lines = new List<string>();
-            foreach (TareaItem task in tasks)
+            List<string> lineas = new List<string>();
+            foreach (TareaItem tarea in tareas)
             {
-                lines.Add(TaskToLine(task));
+                lineas.Add(TareaLinea(tarea));
             }
-            File.WriteAllLines(tasksFilePath, lines);
+            File.WriteAllLines(tareasRutaArchivo, lineas);
         }
 
-        // Convertir una línea de texto en un objeto TaskItem
-        private static TareaItem LineToTask(string line)
+        // Convertir la línea de texto en un objeto TareaItem
+        private static TareaItem LineaTarea(string linea)
         {
-            var parts = line.Split('|');
+            var parts = linea.Split('|');
             return new TareaItem
             {
                 TareaId = int.Parse(parts[0]),
@@ -50,41 +50,41 @@ namespace TaskManagerAPI.Data
             };
         }
 
-        // Convertir un objeto TaskItem en una línea de texto
-        private static string TaskToLine(TareaItem task)
+        // Convierte un objeto TareaItem en una línea de texto
+        private static string TareaLinea(TareaItem tarea)
         {
-            return $"{task.TareaId}|{task.Titulo}|{task.Descripcion}|{task.Fecha}|{task.Estado}";
+            return $"{tarea.TareaId}|{tarea.Titulo}|{tarea.Descripcion}|{tarea.Fecha}|{tarea.Estado}";
         }
 
-        // Leer todos los usuarios desde users.txt
-        public static List<Usuario> ReadUsers()
+        // Leer todos los usuarios
+        public static List<Usuario> LeerUsuarios()
         {
-            if (!File.Exists(usersFilePath)) return new List<Usuario>();
+            if (!File.Exists(usuariosRutaArchivo)) return new List<Usuario>();
             
-            var lines = File.ReadAllLines(usersFilePath);
+            var lineas = File.ReadAllLines(usuariosRutaArchivo);
             List<Usuario> userList = new List<Usuario>();
-            foreach (string line in lines)
+            foreach (string linea in lineas)
             {
-                userList.Add(LineToUser(line));
+                userList.Add(LineaUsuario(linea));
             }
             return userList;
         }
 
-        // Escribir todos los usuarios en users.txt
-        public static void WriteUsers(List<Usuario> users)
+        // Crear usuarios
+        public static void CrearUsuarios(List<Usuario> usuarios)
         {
-            List<string> lines = new List<string>();
-            foreach (Usuario user in users)
+            List<string> lineas = new List<string>();
+            foreach (Usuario usuario in usuarios)
             {
-                lines.Add(UserToLine(user));
+                lineas.Add(UsuarioLinea(usuario));
             }
-            File.WriteAllLines(usersFilePath, lines);
+            File.WriteAllLines(usuariosRutaArchivo, lineas);
         }
 
-        // Convertir una línea de texto en un objeto User
-        private static Usuario LineToUser(string line)
+        // Convertir una línea de texto en un objeto USuaro
+        private static Usuario LineaUsuario(string linea)
         {
-            var parts = line.Split('|');
+            var parts = linea.Split('|');
             return new Usuario
             {
                 Id = int.Parse(parts[0]),
@@ -93,10 +93,10 @@ namespace TaskManagerAPI.Data
             };
         }
 
-        // Convertir un objeto User en una línea de texto
-        private static string UserToLine(Usuario user)
+        // Convertir un objeto Usuario en una línea de texto
+        private static string UsuarioLinea(Usuario usuario)
         {
-            return $"{user.Id}|{user.NombreUsuario}|{user.Password}";
+            return $"{usuario.Id}|{usuario.NombreUsuario}|{usuario.Password}";
         }
     }
 }

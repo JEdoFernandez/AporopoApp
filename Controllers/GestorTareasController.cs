@@ -1,24 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-using TaskManagerAPI.Data;
+using AporopoApi.Data;
 using Models;
 
-namespace TaskManagerAPI.Controllers
+namespace GestorTareasAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TasksController : ControllerBase
+    public class TareasController : ControllerBase
     {
         [HttpGet]
         public ActionResult<IEnumerable<TareaItem>> GetTasks()
         {
-            var tasks = TxtFileHelper.ReadTasks();
+            var tasks = TxtProcesador.LeerTareas();
             return Ok(tasks);
         }
 
         [HttpGet("{id}")]
         public ActionResult<TareaItem> GetTask(int id)
         {
-            var tasks = TxtFileHelper.ReadTasks();
+            var tasks = TxtProcesador.LeerTareas();
             var task = tasks.FirstOrDefault(t => t.TareaId == id);
             if (task == null) return NotFound();
             return Ok(task);
@@ -27,17 +27,17 @@ namespace TaskManagerAPI.Controllers
         [HttpPost]
         public ActionResult<TareaItem> CreateTask(TareaItem task)
         {
-            var tasks = TxtFileHelper.ReadTasks();
+            var tasks = TxtProcesador.LeerTareas();
             task.TareaId = tasks.Count > 0 ? tasks.Max(t => t.TareaId) + 1 : 1;
             tasks.Add(task);
-            TxtFileHelper.WriteTasks(tasks);
+            TxtProcesador.CrearTareas(tasks);
             return CreatedAtAction(nameof(GetTask), new { id = task.TareaId }, task);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateTask(int id, TareaItem updatedTask)
         {
-            var tasks = TxtFileHelper.ReadTasks();
+            var tasks = TxtProcesador.LeerTareas();
             var task = tasks.FirstOrDefault(t => t.TareaId == id);
             if (task == null) return NotFound();
 
@@ -46,19 +46,19 @@ namespace TaskManagerAPI.Controllers
             task.Fecha = updatedTask.Fecha;
             task.Estado = updatedTask.Estado;
             
-            TxtFileHelper.WriteTasks(tasks);
+            TxtProcesador.CrearTareas(tasks);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteTask(int id)
         {
-            var tasks = TxtFileHelper.ReadTasks();
+            var tasks = TxtProcesador.LeerTareas();
             var task = tasks.FirstOrDefault(t => t.TareaId == id);
             if (task == null) return NotFound();
 
             tasks.Remove(task);
-            TxtFileHelper.WriteTasks(tasks);
+            TxtProcesador.CrearTareas(tasks);
             return NoContent();
         }
     }
